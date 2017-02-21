@@ -1,0 +1,19 @@
+<h1>Show Page</h1>
+
+<%= @user.username %>
+
+<hr>
+
+<p>Goals:</p>
+<%= link_to("Add Goal", new_goal_url) %>
+<ul>
+  <% @user.goals.each do |goal| %>
+    <% if @user == current_user %>
+      <li><%= goal.title %>
+      <%= button_to("Edit Goal", edit_goal_url, method: :get) %></li>
+    <% else %>
+      <li><%= goal.title if goal.private == "public" %>
+      <%= button_to("Edit Goal", edit_goal_url, method: :get) %></li>
+    <% end %>
+  <% end %>
+</ul>

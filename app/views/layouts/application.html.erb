@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GoalApp</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body>
+    <% if flash[:errors] %>
+      <ul>
+        <% flash[:errors].each do |error| %>
+          <%= error %>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <% if current_user %>
+      <%= current_user.username %>
+      <%= button_to("Sign Out", "/session", method: :delete) %>
+    <% else %>
+      <%= link_to("Sign Up", "/users/new") %>
+      <%= link_to("Sign In", "/session/new") %>
+    <% end %>
+
+    <%= yield %>
+  </body>
+</html>
